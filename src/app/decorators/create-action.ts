@@ -6,6 +6,14 @@ export function CreateAction(
   Reflect.defineMetadata('CreateAction', propertyKey, target);
 }
 
+export function Fetch(
+  target: any,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
+  Reflect.defineMetadata('Fetch', propertyKey, target);
+}
+
 export function EditAction(
   target: any,
   propertyKey: string,
@@ -36,4 +44,12 @@ export function PreViewDestroy(
   descriptor: PropertyDescriptor
 ) {
   Reflect.defineMetadata('PreViewDestroy', propertyKey, target);
+}
+
+export function PageChange(
+  target: any,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
+  Reflect.defineMetadata('PageChange', propertyKey, target);
 }

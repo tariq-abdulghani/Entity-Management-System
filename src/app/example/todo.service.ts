@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import {
-  CreateAction,
-  DeleteAction,
-  EditAction,
+  CreateAction as Create,
+  DeleteAction as Delete,
+  EditAction as Update,
+  Fetch as Read,
+  PageChange,
   PostViewInit,
 } from '../decorators/create-action';
-import { ViewController } from '../decorators/entity-view-controller';
-import { TableMapping } from '../decorators/table-view-mapping';
+import { ViewController as Controller } from '../decorators/entity-view-controller';
+import { TableMapping as Table } from '../decorators/table-view-mapping';
 
-@TableMapping({ columns: ['id', 'description', 'comment'] })
-@ViewController({ relativePath: 'todos', formEntity: TodoService })
+@Table({ columns: ['id', 'description', 'comment'] })
+@Controller({ resource: 'todos', formEntity: TodoService })
 @Injectable({ providedIn: 'root' })
 export class TodoService {
   name = 'todo';
@@ -17,22 +19,30 @@ export class TodoService {
   constructor() {}
 
   @PostViewInit
-  getAll() {
-    console.log('getting all todos');
+  init() {
+    console.log('init todos');
   }
 
-  @CreateAction
+  @Read
+  getAll() {
+    console.log('fetching all todos todos');
+  }
+
+  @Create
   create() {
     console.log('creating new todo');
   }
 
-  @EditAction
+  @Update
   edit() {
     console.log('edit  todo');
   }
 
-  @DeleteAction
+  @Delete
   delete() {
     console.log('delete  todo');
   }
+
+  @PageChange
+  onPageChange() {}
 }
